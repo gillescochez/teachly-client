@@ -1,0 +1,62 @@
+<div class="panel panel-default">
+
+	<div class="panel-heading">
+
+		<a ng-click="save.handler()" ng-href="" class="btn btn-xs btn-primary">
+			<span class="glyphicon glyphicon-save"></span>
+			<span class="hidden-xs"> {{save.label}}</span>
+		</a>
+
+		<a ng-href="{{path}}/remove/{{item.id}}" class="btn btn-xs btn-danger pull-right" ng-show="actions.remove">
+			<span class="glyphicon glyphicon-remove"></span>
+			<span class="hidden-xs"> {{actions.remove.label}}</span>
+		</a>
+
+	</div>
+
+	<div class="panel-body">
+
+		<form role="form">
+
+			<div class="form-group" ng-repeat="field in fields">
+
+				<!-- hidden field -->
+				<input ng-if="hiddenFields[field]" ng-model="item[field]" type="hidden" value="{{hiddenFields[field]}}" />
+
+				<!-- displayed field -->
+				<label for="field-{{$index}}" ng-if="!hiddenFields[field]">{{headers[$index]}}</label>
+				<span ng-switch="types[field].value"  ng-if="!hiddenFields[field]">
+
+					<!-- Date picker -->
+					<span ng-switch-when="date" class="date" datepicker ng-model="item[field]"></span>
+
+					<!-- Time picker -->
+					<div timepicker ng-switch-when="time" ng-model="item[field]"></div>
+
+                    <!-- Days picker -->
+					<div dayspicker ng-switch-when="days">
+						<input type="hidden" ng-model="item[field]" value="{{item[field]}}" />
+					</div>
+
+					<!-- Select -->
+					<select ng-switch-when="select" value="{{item[field]}}" id="field-{{$index}}" class="form-control" ng-model="item[field]">
+						<option value="{{value}}" ng-repeat="(value, label) in types[field].options" ng-class="{selected: ($index + 1) }">{{label}}</option>
+					</select>
+
+                    <!-- checkbox -->
+					<input ng-switch-when="checkbox" ng-checked="item[field]" type="checkbox" id="field-{{$index}}" class="checkbox" ng-model="item[field]" />
+
+                    <!-- textarea -->
+					<textarea ng-switch-when="textarea" id="field-{{$index}}" class="form-control" ng-model="item[field]"></textarea>
+
+					<!-- Normal input -->
+					<input ng-switch-default type="text" value="{{item[field]}}" id="field-{{$index}}" class="form-control" ng-model="item[field]" />
+
+				</span>
+			</div>
+
+		</form>
+
+	</div>
+
+</div>

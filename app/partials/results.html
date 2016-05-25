@@ -1,0 +1,7 @@
+<div id="results" class="panel panel-default" ng-show="isHidden">
+    <div class="panel-heading">
+        {{lesson.title}}
+    </div>
+    <div id="results-students" ng-if="isStudent" ng-include src="'partials/results-student.html'" class="panel-body"></div>
+    <div id="results-students" ng-if="isTeacher" ng-include src="'partials/results-teacher.html'" class="panel-body"></div>
+</div>

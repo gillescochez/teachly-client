@@ -1,0 +1,42 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<span class="glyphicon glyphicon-comment"></span> Forums
+		<button class="btn btn-primary pull-right btn-xs" ng-click="discuss()">
+			Start a discussion
+		</button>
+	</div>
+	<div class="panel-body">
+		<div ng-hide="forums.length">No discussion started for this lesson</div>
+		<table class="table table-striped" ng-show="forums.length">
+			<tr>
+				<th>Message</th>
+				<th>Author</th>
+				<th>Posted</th>
+				<th>Replies</th>
+				<th>Actions</th>
+			</tr>
+			<tr ng-repeat-start="forum in forums" ng-class="{active: forum.repliesCollapsed}">
+				<td>
+					<a href="" ng-click="forum.repliesCollapsed = !forum.repliesCollapsed;">
+						<span class="glyphicon glyphicon-plus-sign" ng-hide="forum.repliesCollapsed"></span>
+						<span class="glyphicon glyphicon-minus-sign" ng-show="forum.repliesCollapsed"></span>
+						{{forum.message}}
+					</a>
+				</td>
+				<td>{{forum.author || "Unknown"}}</td>
+				<td>{{forum.createdAt | date: "dd/M/yy hh:mm"}}</td>
+				<td>{{forum.replies.length || 0}}</td>
+				<td><button ng-click="discuss(forum.id)" class="btn btn-success btn-xs">Add a reply</button></td>
+			</tr>
+			<tr ng-repeat-end ng-repeat="reply in forum.replies" ng-show="forum.repliesCollapsed">
+				<td>
+					<span class="glyphicon glyphicon-chevron-right"></span> {{reply.message}}
+				</td>
+				<td>{{reply.author || "Unknown"}}</td>
+				<td>{{reply.createdAt | date: "dd/M/yy hh:mm"}}</td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+	</div>
+</div>

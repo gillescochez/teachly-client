@@ -1,0 +1,69 @@
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        <a class="btn btn-primary btn-xs" ng-href="{{path}}/create{{filter}}" ng-show="actions.add">
+            <span class="glyphicon glyphicon-plus"></span>
+            <span class="hidden-xs"> {{actions.add.label}}</span>
+        </a>
+    </div>
+
+    <table class="table table-striped" ng-show="items">
+        <thead>
+        <tr>
+            <th ng-repeat="header in headers">{{header}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in items">
+
+            <td ng-repeat="field in fields">
+                    <span ng-switch="types[field].value">
+
+                        <span ng-switch-when="date">{{item[field] | date:'yyyy-MM-dd'}}</span>
+                        <span ng-switch-when="time">{{item[field] | date:'HH:mm'}}</span>
+
+                        <span ng-switch-when="select">{{types[field].options[item[field]]}}</span>
+
+                        <span ng-switch-default>
+                            {{item[field]}}
+                        </span>
+                    </span>
+            </td>
+
+            <td>
+
+                <a ng-href="{{path}}/edit/{{item.id}}{{filter}}" class="btn btn-xs btn-warning" ng-show="actions.edit">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    <span class="hidden-xs"> {{actions.edit.label}}</span>
+                </a>
+
+                <a ng-href="#/lesson/{{item.id}}" class="btn btn-xs btn-primary" ng-show="actions.view">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                    <span class="hidden-xs"> {{actions.view.label}}</span>
+                </a>
+
+                <a ng-href="#{{actions.extra.getUrl(item.id)}}" class="btn btn-xs btn-info" ng-show="actions.extra">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                    <span class="hidden-xs"> {{actions.extra.label}}</span>
+                </a>
+
+                <a class="lesson-button btn btn-xs btn-success"
+                   initialized="{{item.initialized}}" index="{{item.id}}"
+                   given="{{item.given}}" taken="{{item.taken}}"
+                   started="{{item.started}}" signed="{{item.signed}}"
+                   published="{{item.published}}"
+                   callback="signUp">
+                    <span class="glyphicon"></span>
+                    <span class="hidden-xs lesson-label"></span>
+                </a>
+
+                <a ng-href="{{path}}/remove/{{item.id}}" class="btn btn-xs btn-danger pull-right" ng-show="actions.remove">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    <span class="hidden-xs"> {{actions.remove.label}}</span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>

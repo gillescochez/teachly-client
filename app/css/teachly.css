@@ -1,0 +1,109 @@
+body {
+    background-image:url(../img/noisy.png);
+}
+table {
+    background:#fff;
+    border-bottom:1px solid #ccc;
+}
+#login {
+    width:50%;
+    margin:20px auto;
+    border:1px solid #ccc;
+    border-radius:4px;
+    padding:10px;
+    background:#fff;
+}
+#toolbar {
+    overflow:hidden;
+    background:#fff;
+    border-bottom:1px solid #ccc;
+    padding:10px;
+}
+#sections a {
+    margin-right:10px;
+}
+.alert,
+.panel {
+    margin:10px;
+    box-shadow:2px 2px 3px #ccc;
+}
+.panel-heading,
+.panel-body,
+.panel-footer {
+    padding:10px;
+}
+.panel-heading {
+    font-weight:bold;
+}
+.date table {
+    border-bottom:none;
+}
+.progress {
+    margin:0;
+}
+#toasts {
+    position:absolute;
+    top:5px;
+    right:5px;
+    width:65%;
+}
+#toasts .alert {
+    -ms-transition:1s;
+    -webkit-transition:1s;
+    transition:1s;
+    opacity:0;
+}
+#toasts .alert.toasted {
+    -ms-transition:1s;
+    -webkit-transition:1s;
+    transition:1s;
+    opacity:1;
+}
+.navbar, .navbar-default {
+    border-radius:0;
+    border-right:none;
+    border-left:none;
+    -webkit-box-shadow:none;
+    box-shadow:none;
+    margin-bottom: 0;
+}
+.pagination {
+    margin:5px 0 0 0;
+}
+.pie,
+.pie .total {
+    margin:10px;
+}
+.badge-connected {
+    background:#3e8f3e !important;
+}
+.badge-signed-up {
+    background:#428bca !important;
+}
+
+.panel-half {
+    width: 48%;
+    margin: 0 1% 1% 1%;
+}
+.panel-third {
+    width: 31.3%;
+    margin: 0 1% 1% 1%;
+}
+.panel-third {
+    width: 64.6%;
+    margin: 0 1% 1% 1%;
+}
+.panel-quarter {
+    width: 23%;
+    margin: 0 1% 1% 1%;
+}
+.panel-3quarter {
+    width: 73%;
+    margin: 0 1% 1% 1%;
+}
+.lesson h3 {
+    margin: 0 1% 1% 1%;
+}
+.margin-right {
+    margin-right: 10px;
+}

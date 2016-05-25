@@ -1,0 +1,178 @@
+<div id="dashboard">
+
+    <!-- School -->
+
+    <div ng-if="user_type == 1" ng-show="teachers" class="panel panel-default panel-teachers">
+
+        <div class="panel-heading text-uppercase">Teachers</div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Total score</th>
+                    <th>Average score</th>
+                    <th>Scores</th>
+                    <th>Lessons</th>
+                    <th>Last lesson</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="teacher in teachers">
+                    <td>{{teacher.full_name || teacher.username}}</td>
+                    <td>{{teacher.score_sum || 0}}</td>
+                    <td>{{teacher.score_average || 0}}</td>
+                    <td>{{teacher.lessons_delivered || 0}}</td>
+                    <td>{{teacher.lessons_count || 0}}</td>
+                    <td>{{teacher.last_lesson_given.title || ""}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer">
+            <div class="total"><span class="badge"><span class="text-capitalize hidden-xs">Total: </span>{{teachers.length}}</span></div>
+            <ul class="pagination pagination-sm" ng-show="teachers.length > 10">
+                <li><a href="#">&laquo;</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&raquo;</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div ng-if="user_type == 1" ng-show="students" class="panel panel-default panel-students">
+
+        <div class="panel-heading text-uppercase">Students</div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Total score</th>
+                    <th>Average score</th>
+                    <th>Lessons taken</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="student in students">
+                    <td>{{student.full_name || student.username}}</td>
+                    <td>{{student.score_sum || 0}}</td>
+                    <td>{{student.score_average || 0}}</td>
+                    <td>{{student.lessons_taken || 0}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer">
+            <div class="total"><span class="badge"><span class="text-capitalize hidden-xs">Total: </span>{{students.length}}</span></div>
+            <ul class="pagination pagination-sm" ng-show="students.length > 10">
+                <li><a href="#">&laquo;</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&raquo;</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div ng-if="user_type == 1" ng-repeat="(section, permissions) in sections">
+
+        <div ng-switch="section">
+
+            <div ng-switch-when="users" class="pie pull-left"
+                 pie radius="50" width="280"
+                 values="[{{data[section].schools.count}},{{data[section].teachers.count}},{{data[section].students.count}}]"
+                 legends='["%%.%% Administrators", "%%.%% Teachers", "%%.%% Students"]'>
+                <div class="total"><span class="badge"><span class="text-capitalize">{{section}}: </span>{{data[section].count}}</span></div>
+            </div>
+
+            <div ng-switch-when="lessons" class="pie pull-left"
+                 pie radius="50" width="250"
+                 values="[{{data[section].upcoming}},{{data[section].delivered}}]"
+                 legends='["%%.%% Upcoming", "%%.%% Delivered"]'>
+                <div class="total"><span class="badge"><span class="text-capitalize">{{section}}: </span>{{data[section].count}}</span></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Teacher -->
+
+    <div ng-if="user_type == 2" ng-show="data.lessons" class="panel panel-default panel-lessons">
+
+        <div class="panel-heading text-uppercase">Lessons</div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date/Time</th>
+                    <th>Questions</th>
+                    <th>Attendance</th>
+                    <th>Average score</th>
+                    <th>Total score</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="lesson in data.lessons.lessons">
+                    <td>{{lesson.title}}</td>
+                    <td>{{lesson.start_date | date:'yyyy-MM-dd'}} {{lesson.start_time | date:'HH:mm'}}</td>
+                    <td>{{lesson.questions_count || "-"}}</td>
+                    <td>{{lesson.students_count || "-"}}</td>
+                    <td>{{lesson.score_average || "-"}}</td>
+                    <td>{{lesson.score_sum || "-"}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div ng-if="user_type == 2" ng-repeat="(section, permissions) in sections">
+
+        <div ng-switch="section">
+
+            <div ng-switch-when="lessons" class="pie pull-left"
+                 pie radius="50" width="250"
+                 values="[{{data[section].upcoming}},{{data[section].delivered}}]"
+                 legends='["%%.%% Upcoming", "%%.%% Delivered"]'>
+                <div class="total"><span class="badge"><span class="text-capitalize">{{section}}: </span>{{data[section].count}}</span></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Student -->
+
+    <div ng-if="user_type == 3" ng-show="lessons" class="panel panel-default panel-lessons">
+
+        <div class="panel-heading text-uppercase">Lessons taken</div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date/Time</th>
+                    <th>Teacher</th>
+                    <th>Score</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="lesson in lessons">
+                    <td>{{lesson.title}}</td>
+                    <td>{{lesson.start_date | date:'yyyy-MM-dd'}} {{lesson.start_time | date:'HH:mm'}}</td>
+                    <td>{{lesson.teacher.first_name}} {{lesson.teacher.last_name}}</td>
+                    <td>{{lesson.score || "-"}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

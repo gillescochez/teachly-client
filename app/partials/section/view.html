@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+
+	<div class="panel-heading" ng-show="actions.edit || actions.delete">
+		<a ng-href="{{path}}/edit/{{item.id}}" class="btn btn-xs btn-warning" ng-show="actions.edit">
+			<span class="glyphicon glyphicon-pencil"></span>
+			<span class="hidden-xs"> {{actions.edit.label}}</span>
+		</a>
+		<a ng-href="{{path}}/remove/{{item.id}}" class="btn btn-xs btn-danger pull-right" ng-show="actions.remove">
+			<span class="glyphicon glyphicon-remove"></span>
+			<span class="hidden-xs"> {{actions.remove.label}}</span>
+		</a>
+	</div>
+
+	<table class="table">
+		<tr ng-repeat="field in fields">
+			<th>{{headers[$index]}}</th>
+			<td>
+				<span ng-switch="types[field].value">
+
+					<span ng-switch-when="date">{{item[field] | date:'yyyy-MM-dd'}}</span>
+
+					<span ng-switch-when="time">{{item[field] | date:'HH:mm'}}</span>
+
+					<span ng-switch-when="select">{{types[field].options[item[field]]}}</span>
+
+					<span ng-switch-default>{{item[field]}}</span>
+				</span>
+			</td>
+		</tr>
+	</table>
+
+</div>

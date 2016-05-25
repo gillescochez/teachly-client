@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+
+	<div class="panel-heading">
+		{{confirmation.message}}
+		<a ng-href="" ng-click="confirmation.no()" class="btn btn-xs btn-default">
+			<span class="hidden-xs"> {{confirmation.refuse}}</span>
+		</a>
+		<a ng-href=""  ng-click="confirmation.yes()" class="btn btn-xs btn-primary">
+			<span class="hidden-xs"> {{confirmation.accept}}</span>
+		</a>
+	</div>
+
+	<table class="table">
+		<tr ng-repeat="field in fields">
+			<th>{{headers[$index]}}</th>
+			<td>
+				<span ng-switch="types[field].value">
+					<span ng-switch-when="select">{{types[field].options[item[field]]}}</span>
+					<span ng-switch-default>{{item[field]}}</span>
+				</span>
+			</td>
+		</tr>
+	</table>
+
+</div>

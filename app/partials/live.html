@@ -1,0 +1,51 @@
+<div id="live-lesson" class="panel panel-default">
+	<div class="panel-heading">
+		{{lesson.title}}
+		<span class="badge badge-connected pull-right" ng-if="user_type == 2"><span class="hidden-xs">Connected: </span>{{connected}}</span>
+        <span class="badge badge-signed-up pull-right" ng-if="user_type == 2" style="margin-right:10px"><span class="hidden-xs">Signed up: </span>{{signed_up}}</span>
+	</div>
+	<div class="panel-body">
+
+		<!-- Teacher -->
+		<div class="questions" ng-if="user_type == 2">
+			<ul class="list-group">
+				<li class="list-group-item" ng-repeat="q in questions" ng-class="{'list-group-item-info':q.active, 'list-group-item-success':q.used}">
+					<span class="badge">{{q.answered || 0}} / {{connected}}</span>
+					{{q.question}}
+				</li>
+			</ul>
+		</div>
+
+		<!-- Student view -->
+		<div class="question" ng-if="user_type == 3">
+			<h3>{{question}}</h3>
+		</div>
+		<div class="answers" ng-if="user_type == 3">
+			<ul class="list-group">
+				<li class="list-group-item" ng-repeat="a in answers" ng-class="{'list-group-item-info':a.selected}" ng-click="selectAnswer($index)">
+					{{a.answer}}
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="panel-footer">
+
+		<!-- Teacher -->
+        <a ng-href="" ng-click="next.handler()" class="btn btn-xs btn-info" ng-show="next.show">
+            <span class="glyphicon glyphicon-forward"></span>
+            <span class="hidden-xs"> {{next.label}}</span>
+        </a>
+
+        <a ng-href="" ng-click="end.handler()" class="btn btn-xs btn-info" ng-show="end.show">
+            <span class="glyphicon glyphicon-forward"></span>
+            <span class="hidden-xs"> {{end.label}}</span>
+        </a>
+
+		<a ng-href="" ng-click="start.handler()" class="btn btn-xs btn-success" ng-show="start.show">
+			<span class="glyphicon glyphicon-play"></span>
+			<span class="hidden-xs"> {{start.label}}</span>
+		</a>
+
+
+	</div>
+</div>

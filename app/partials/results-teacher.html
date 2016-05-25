@@ -1,0 +1,12 @@
+<table class="table table-striped">
+    <tr>
+        <th>Question</th>
+        <th>Valid</th>
+    </tr>
+    <tr  ng-repeat="q in questions">
+        <td>{{q.question}}</td>
+        <td>
+            <span class="badge">{{q.valids}} / {{q.participants}}</span>
+        </td>
+    </tr>
+</table>

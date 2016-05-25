@@ -1,0 +1,99 @@
+<div class="lesson">
+
+    <h3>{{lesson.title}}</h3>
+
+    <div class="panel panel-default panel-quarter pull-left">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-info-sign"></span>
+            Information
+        </div>
+        <div class="panel-body">
+            <dl class="dl-horizontal">
+                <dt>Scheduled date</dt>
+                <dd>{{lesson.start_date | date: "d / M / yyyy"}}</dd>
+                <dt>Scheduled time</dt>
+                <dd>{{lesson.start_time | date: "hh:mm"}}</dd>
+                <dt>Teacher</dt>
+                <dd>{{lesson.teacher.first_name}} {{lesson.teacher.last_name}}</dd>
+                <dt>Status</dt>
+                <dd>
+                    <a class="lesson-button btn btn-success btn-xs"
+                       initialized="{{lesson.initialized}}" index="{{lesson.id}}"
+                       given="{{lesson.given}}" taken="{{lesson.taken}}"
+                       started="{{lesson.started}}" signed="{{lesson.signed}}"
+                       published="{{lesson.published}}"
+                       callback="signUp">
+                        <span class="glyphicon"></span>
+                        <span class="hidden-xs lesson-label"></span>
+                    </a>
+                </dd>
+            </dl>
+        </div>
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-asterisk"></span>
+            News
+        </div>
+        <div class="panel-body">
+            <div ng-hide="news.length">No news for this lesson</div>
+            <div ng-repeat="entry in news">
+                <p>{{entry.updated | date: 'dd-MM-yyyy'}}: {{entry.title}}</p>
+                <p>{{entry.message}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default panel-3quarter pull-right">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-comment"></span> Discussions
+            <button class="btn btn-primary pull-right btn-xs" ng-click="discuss()">
+                Start a discussion
+            </button>
+        </div>
+        <div class="panel-body">
+            <div ng-hide="forums.length">No discussion started for this lesson</div>
+            <table class="table table-striped" ng-show="forums.length">
+                <tr>
+                    <th>Message</th>
+                    <th>Author</th>
+                    <th>Posted</th>
+                    <th>Replies</th>
+                    <th>Actions</th>
+                </tr>
+                <tr ng-repeat-start="forum in forums" ng-class="{active: forum.repliesCollapsed}">
+                    <td>
+                        <a href="" ng-click="forum.repliesCollapsed = !forum.repliesCollapsed;">
+                            <span class="glyphicon glyphicon-plus-sign" ng-hide="forum.repliesCollapsed"></span>
+                            <span class="glyphicon glyphicon-minus-sign" ng-show="forum.repliesCollapsed"></span>
+                            {{forum.message}}
+                        </a>
+                    </td>
+                    <td>{{forum.author || "Unknown"}}</td>
+                    <td>{{forum.createdAt | date: "dd/M/yy hh:mm"}}</td>
+                    <td>{{forum.replies.length || 0}}</td>
+                    <td><button ng-click="discuss(forum.id)" class="btn btn-success btn-xs">Add a reply</button></td>
+                </tr>
+                <tr ng-repeat-end ng-repeat="reply in forum.replies" ng-show="forum.repliesCollapsed">
+                    <td>
+                        <span class="glyphicon glyphicon-chevron-right"></span> {{reply.message}}
+                    </td>
+                    <td>{{reply.author || "Unknown"}}</td>
+                    <td>{{reply.createdAt | date: "dd/M/yy hh:mm"}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-default panel-3quarter pull-right">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-paperclip"></span> Resources
+            <button class="btn btn-primary btn-xs pull-right" ng-show="canAddResources" ng-click="addResource()">Add a resource</button>
+        </div>
+        <div class="panel-body">
+            <div ng-hide="resources.length">No resources available for this lesson</div>
+            <div ng-show="resources.length"></div>
+        </div>
+    </div>
+
+</div>

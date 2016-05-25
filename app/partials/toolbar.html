@@ -1,0 +1,38 @@
+<nav class="navbar navbar-default" role="navigation" ng-controller="toolbar">
+
+	<div class="container-fluid">
+
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#/dashboard">Teachly</a>
+		</div>
+
+		<div class="collapse navbar-collapse" collapse="isCollapsed">
+			<span ng-controller="sections" ng-show="sections.length">
+				<ul class="nav navbar-nav">
+					<li ng-repeat="section in sections"><a href="#{{section.path}}">{{section.label}}</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#" ng-click="logout()">Log out</a></li>
+				</ul>
+				<p class="navbar-text navbar-right">
+					<span class="hidden-xs">Signed in as </span>
+					<a href="#" class="navbar-link">{{username}}</a>
+				</p>
+			</span>
+		</div>
+
+	</div>
+
+</nav>
+<ol class="breadcrumb" ng-controller="breadcrumb" ng-show="crumbs.length > 0">
+    <li ng-repeat="crumb in crumbs">
+        <a href="#{{crumb.path}}" ng-show="crumb.path" class="text-capitalize">{{crumb.label}}</a>
+        <span ng-hide="crumb.path" class="text-capitalize">{{crumb.label}}</span>
+    </li>
+</ol>

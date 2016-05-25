@@ -1,0 +1,18 @@
+<table class="table table-striped">
+    <tr>
+        <th>Question</th>
+        <th>Answer</th>
+        <th>Valid</th>
+    </tr>
+    <tr ng-repeat="q in questions">
+        <td>{{q.question}}</td>
+        <td>{{getAnswer(q.id).answer}}</td>
+        <td>
+            <span ng-show="getAnswer(q.id).is_valid == 'true'" class="glyphicon glyphicon-thumbs-up" style="color:green;"></span>
+            <span ng-hide="getAnswer(q.id).is_valid == 'true'" class="glyphicon glyphicon-thumbs-down" style="color:red;"></span>
+        </td>
+    </tr>
+</table>
+<pre>
+    Score: {{user_score}} / {{questions.length}}
+</pre>
